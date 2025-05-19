@@ -1,0 +1,387 @@
+<app-header></app-header>
+
+<!-- Diagrama de flujo de Akita - Versión mejorada -->
+<div class="p-6 bg-slate-800 mb-10">
+  <h2 class="text-2xl font-bold mb-6 text-center text-slate-100">Análisis del Flujo de Datos en Akita</h2>
+  
+  <!-- Contenedor principal -->
+  <div class="max-w-6xl mx-auto">
+    <!-- Diagrama visual con componentes -->
+    <div class="relative flex flex-col md:flex-row justify-between items-center px-4 py-12 mb-8">
+      <!-- Componente -->
+      <div class="relative z-10 bg-purple-900 text-white p-4 rounded-md shadow-lg w-64 mb-10 md:mb-0">
+        <h3 class="text-purple-300 font-bold mb-2">Componente</h3>
+        <p class="text-xs">Interfaz de usuario que muestra datos y captura eventos</p>
+        <div class="text-xs mt-2 italic text-purple-300">UserComponent</div>
+        <ul class="text-xs mt-2 list-disc pl-4">
+          <li>Inyecta Query y Service</li>
+          <li>Usa signals/observables</li>
+          <li>Implementa ngOnInit</li>
+        </ul>
+      </div>
+
+      <!-- Servicio -->
+      <div class="relative z-10 bg-green-900 text-white p-4 rounded-md shadow-lg w-64 mb-10 md:mb-0">
+        <h3 class="text-green-300 font-bold mb-2">Servicio</h3>
+        <p class="text-xs">Lógica de negocio y comunicación con APIs</p>
+        <div class="text-xs mt-2 italic text-green-300">SessionService</div>
+        <ul class="text-xs mt-2 list-disc pl-4">
+          <li>Inyecta Store y HttpClient</li>
+          <li>Implementa métodos CRUD</li>
+          <li>Maneja setLoading y setError</li>
+        </ul>
+      </div>
+
+      <!-- Store -->
+      <div class="relative z-10 bg-amber-900 text-white p-4 rounded-md shadow-lg w-64 mb-10 md:mb-0">
+        <h3 class="text-amber-300 font-bold mb-2">Store</h3>
+        <p class="text-xs">Almacén único de estado de la aplicación</p>
+        <div class="text-xs mt-2 italic text-amber-300">SessionStore</div>
+        <ul class="text-xs mt-2 list-disc pl-4">
+          <li>Mantiene initialState</li>
+          <li>Usa decorador &#64;StoreConfig</li>
+          <li>Extiende de Store&lt;State&gt;</li>
+        </ul>
+      </div>
+
+      <!-- Query -->
+      <div class="relative z-10 bg-sky-900 text-white p-4 rounded-md shadow-lg w-64">
+        <h3 class="text-sky-300 font-bold mb-2">Query</h3>
+        <p class="text-xs">Consultas y acceso al estado reactivo</p>
+        <div class="text-xs mt-2 italic text-sky-300">SessionQuery</div>
+        <ul class="text-xs mt-2 list-disc pl-4">
+          <li>Devuelve Observables</li>
+          <li>Selecciona propiedades</li>
+          <li>Filtra/transforma datos</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Detalles del flujo de datos simplificados -->
+    <div class="bg-slate-700 rounded-md shadow-lg p-5 mb-8">
+      <h3 class="text-xl font-bold text-slate-100 mb-4">Ciclo de Vida de los Datos</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Paso 1 -->
+        <div class="bg-slate-600 p-3 rounded-md">
+          <div class="flex items-center mb-2">
+            <span class="text-purple-300 font-bold">1. Componente → Servicio</span>
+          </div>
+          <p class="text-xs text-slate-300">El componente captura un evento del usuario (click) e invoca un método del servicio para actualizar datos.</p>
+        </div>
+        
+        <!-- Paso 2 -->
+        <div class="bg-slate-600 p-3 rounded-md">
+          <div class="flex items-center mb-2">
+            <span class="text-green-300 font-bold">2. Servicio → Store</span>
+          </div>
+          <p class="text-xs text-slate-300">El servicio procesa la lógica de negocio y actualiza el estado en el store con el método update().</p>
+        </div>
+        
+        <!-- Paso 3 -->
+        <div class="bg-slate-600 p-3 rounded-md">
+          <div class="flex items-center mb-2">
+            <span class="text-amber-300 font-bold">3. Store → Query</span>
+          </div>
+          <p class="text-xs text-slate-300">Cuando el estado cambia en el Store, los Observables internos en Query se actualizan automáticamente.</p>
+        </div>
+        
+        <!-- Paso 4 -->
+        <div class="bg-slate-600 p-3 rounded-md">
+          <div class="flex items-center mb-2">
+            <span class="text-sky-300 font-bold">4. Query → Componente</span>
+          </div>
+          <p class="text-xs text-slate-300">El componente recibe actualizaciones mediante sus suscripciones a Query usando métodos como select().</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- NUEVA SECCIÓN: Tipos de Store en Akita -->
+    <div class="bg-slate-700 rounded-md shadow-lg p-5 mb-8">
+      <h3 class="text-xl font-bold text-slate-100 mb-4">Tipos de Store en Akita</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Store - Lo implementado actualmente -->
+        <div class="bg-amber-900 p-4 rounded-md text-white">
+          <h4 class="text-amber-300 font-bold mb-3 text-lg">Store <span class="text-xs bg-amber-700 p-1 rounded ml-2">Implementado</span></h4>
+          <p class="text-xs mb-3">Gestiona estados simples como un objeto único (por ejemplo, un usuario o datos de sesión).</p>
+          
+          <div class="bg-amber-800 p-3 rounded-md mb-3">
+            <h5 class="text-amber-200 text-sm mb-1">Uso ideal</h5>
+            <p class="text-xs text-slate-200">Estados que no son colecciones: configuración, autenticación, preferencias.</p>
+          </div>
+          
+          <div class="bg-amber-800 p-3 rounded-md">
+            <h5 class="text-amber-200 text-sm mb-1">Características</h5>
+            <ul class="text-xs text-slate-200 list-disc pl-4 space-y-1">
+              <li>Maneja objetos individuales</li>
+              <li>Operaciones básicas (update, reset)</li>
+              <li>Diseñado para estados atómicos</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- EntityStore - Para implementar en el futuro -->
+        <div class="bg-indigo-900 p-4 rounded-md text-white">
+          <h4 class="text-indigo-300 font-bold mb-3 text-lg">EntityStore <span class="text-xs bg-indigo-700 p-1 rounded ml-2">Pdte por implementar</span></h4>
+          <p class="text-xs mb-3">Diseñado para gestionar colecciones de entidades, similar a una tabla en una base de datos.</p>
+          
+          <div class="bg-indigo-800 p-3 rounded-md mb-3">
+            <h5 class="text-indigo-200 text-sm mb-1">Uso ideal</h5>
+            <p class="text-xs text-slate-200">Colecciones de elementos: listas de usuarios, productos, comentarios, etc.</p>
+          </div>
+          
+          <div class="bg-indigo-800 p-3 rounded-md">
+            <h5 class="text-indigo-200 text-sm mb-1">Características</h5>
+            <ul class="text-xs text-slate-200 list-disc pl-4 space-y-1">
+              <li>Maneja arrays de objetos con IDs únicos</li>
+              <li>Operaciones avanzadas (add, update, remove, upsert)</li>
+              <li>Funcionalidades de filtrado, ordenación y paginación</li>
+              <li>Similar a una tabla de base de datos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Aclaración importante sobre el flujo -->
+      <div class="bg-slate-600 p-4 rounded-md mt-4">
+        <h4 class="text-slate-100 font-bold mb-2">Importante: Flujo de Datos Consistente</h4>
+        <p class="text-xs text-slate-300">El flujo de datos representado arriba es <span class="font-bold text-white">idéntico para ambos tipos de store</span>. La diferencia radica únicamente en los métodos utilizados para manipular los datos y la estructura interna, pero la arquitectura y el patrón de comunicación entre componentes se mantiene igual.</p>
+      </div>
+    </div>
+    
+    <!-- Métodos clave de los componentes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div class="bg-slate-700 p-4 rounded-md">
+        <h3 class="text-amber-300 font-bold mb-2">Métodos de Store</h3>
+        <ul class="list-disc pl-5 text-slate-200 space-y-1 text-sm">
+          <li><span class="text-amber-200 font-mono text-xs">update()</span>: Actualiza propiedades del estado</li>
+          <li><span class="text-amber-200 font-mono text-xs">setLoading()</span>: Controla estado de carga</li>
+          <li><span class="text-amber-200 font-mono text-xs">setError()</span>: Establece errores</li>
+          <li><span class="text-amber-200 font-mono text-xs">reset()</span>: Restaura estado inicial</li>
+        </ul>
+      </div>
+      
+      <div class="bg-slate-700 p-4 rounded-md">
+        <h3 class="text-sky-300 font-bold mb-2">Métodos de Query</h3>
+        <ul class="list-disc pl-5 text-slate-200 space-y-1 text-sm">
+          <li><span class="text-sky-200 font-mono text-xs">select()</span>: Observable de todo el estado</li>
+          <li><span class="text-sky-200 font-mono text-xs">select('prop')</span>: Observable de una propiedad</li>
+          <li><span class="text-sky-200 font-mono text-xs">selectLoading()</span>: Estado de carga</li>
+          <li><span class="text-sky-200 font-mono text-xs">getValue()</span>: Valor actual no reactivo</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Configuración global simplificada -->
+    <div class="bg-slate-700 p-4 rounded-md">
+      <h3 class="text-xl font-bold text-slate-100 mb-3">Configuración Global</h3>
+      <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+        <div class="md:w-1/2 bg-slate-600 p-3 rounded-md">
+          <h4 class="text-rose-300 font-bold">app.config.ts</h4>
+          <p class="text-xs text-slate-300 mt-1">Proporciona los providers necesarios para Akita, incluyendo Store, Query y Service.</p>
+        </div>
+        
+        <div class="md:w-1/2 bg-slate-600 p-3 rounded-md">
+          <h4 class="text-lime-300 font-bold">app.routes.ts</h4>
+          <p class="text-xs text-slate-300 mt-1">Define las rutas y la carga de componentes, conectando la UI con el estado.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ventajas de Akita -->
+    <div class="bg-slate-700 p-4 rounded-md mt-4">
+      <h3 class="text-xl font-bold text-slate-100 mb-3">Ventajas de Akita como Gestor de Estado</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-slate-600 p-3 rounded-md">
+          <h4 class="text-slate-100 font-bold mb-1">Predictibilidad</h4>
+          <p class="text-xs text-slate-300">Estado inmutable centralizado en un solo lugar, haciendo que las aplicaciones sean más predecibles y fáciles de depurar.</p>
+        </div>
+        <div class="bg-slate-600 p-3 rounded-md">
+          <h4 class="text-slate-100 font-bold mb-1">Reactividad</h4>
+          <p class="text-xs text-slate-300">Basado en RxJS, proporciona observables para reaccionar automáticamente a los cambios de estado.</p>
+        </div>
+        <div class="bg-slate-600 p-3 rounded-md">
+          <h4 class="text-slate-100 font-bold mb-1">Estructura Clara</h4>
+          <p class="text-xs text-slate-300">La separación en Store, Query y Service proporciona una arquitectura limpia y mantenible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-4 md:p-8 text-slate-100 min-h-screen">
+  <header class="mb-10">
+    <h2 class="text-4xl font-bold mb-4 text-center text-sky-600 tracking-tight">
+      Explorando Akita en Nuestra Aplicación Angular
+    </h2>
+    <p class="text-center text-slate-600 text-lg">
+      Una guía interactiva de la estructura de Akita y su integración.
+      <br>Expande los archivos para ver su contenido y pasa el cursor sobre los elementos para más detalles.
+    </p>
+  </header>
+
+  <div class="bg-slate-900 p-4 sm:p-6 rounded-lg shadow-xl font-mono text-sm">
+    <ul class="space-y-3">
+      <li>
+        <span class="text-blue-600">📁 src/</span>
+        <ul class="pl-4 sm:pl-5 mt-2 space-y-2 border-l-2 border-blue-200">
+          <li>
+            <span class="text-blue-600">📁 app/</span>
+            <ul class="pl-4 sm:pl-5 mt-2 space-y-2 border-l-2 border-blue-200">
+
+              <!-- PAGES (USER COMPONENT EXAMPLE) -->
+              <li>
+                <span class="text-purple-600">📁 pages/</span>
+                <ul class="pl-4 sm:pl-5 mt-2 space-y-2 border-l-2 border-purple-200">
+                  <li>
+                    <span class="text-purple-600">📁 user/</span>
+                    <ul class="pl-4 sm:pl-5 mt-2 space-y-1 border-l-2 border-purple-200">
+                      <li class="relative">
+                        <details class="text-white group">
+                          <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                            <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 user.component.ts
+                            <span class="ml-3 text-sky-600 text-xs font-semibold">// AKITA USE</span>
+                          </summary>
+                          <div class="relative">
+                            <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                              <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">user.component.ts</div>
+                              <div class="p-1 text-black">
+                                <markdown [data]="userComponentCode" class="markdown-code"></markdown>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- STORE -->
+              <li class="pt-2">
+                <span class="text-amber-600">📁 store/</span>
+                <span class="ml-39 text-amber-600 text-xs font-semibold">// AKITA STORE</span>
+                <ul class="pl-4 sm:pl-5 mt-2 space-y-2 border-l-2 border-amber-200">
+                  <li>
+                    <span class="text-amber-600">📁 session/</span>
+                    <ul class="pl-4 sm:pl-5 mt-2 space-y-1 border-l-2 border-amber-200">
+                      <li class="relative">
+                        <details class="text-white group">
+                          <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                            <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 session.query.ts
+                          </summary>
+                          <div class="relative">
+                            <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                              <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">session.query.ts</div>
+                              <div class="p-1 text-black">
+                                <markdown [data]="sessionQueryCode" class="markdown-code"></markdown>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                      <li class="relative">
+                        <details class="text-white group">
+                          <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                            <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 session.state.ts
+                          </summary>
+                          <div class="relative">
+                            <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                              <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">session.state.ts</div>
+                              <div class="p-1 text-black">
+                                <markdown [data]="sessionStateCode" class="markdown-code"></markdown>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                      <li class="relative">
+                        <details class="text-white group">
+                          <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                            <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 session.service.ts
+                          </summary>
+                          <div class="relative">
+                            <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                              <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">session.service.ts</div>
+                              <div class="p-1 text-black">
+                                <markdown [data]="sessionServiceCode" class="markdown-code"></markdown>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                      <li class="relative">
+                        <details class="text-white group">
+                          <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                            <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 session.store.ts
+                          </summary>
+                          <div class="relative">
+                            <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                              <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">session.store.ts</div>
+                              <div class="p-1 text-black">
+                                <markdown [data]="sessionStoreCode" class="markdown-code"></markdown>
+                              </div>
+                            </div>
+                          </div>
+                        </details>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- APP.CONFIG.TS -->
+              <li class="pt-2 relative">
+                <details class="text-white group">
+                  <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                    <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 app.config.ts
+                    <span class="ml-23 text-rose-600 text-xs font-semibold">// AKITA PROVIDERS</span>
+                  </summary>
+                  <div class="relative">
+                    <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                      <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">app.config.ts</div>
+                      <div class="p-1 text-black">
+                        <markdown [data]="appConfigCode" class="markdown-code"></markdown>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </li>
+
+              <!-- APP.ROUTES.TS -->
+              <li class="pt-2 relative">
+                <details class="text-white group">
+                  <summary class="list-none cursor-pointer hover:text-sky-600 transition-colors py-1 flex items-center">
+                    <span class="details-arrow pr-2 transition-transform duration-200 ease-in-out transform group-[[open]]:rotate-90">►</span>📄 app.routes.ts
+                    <span class="ml-23 text-lime-600 text-xs font-semibold">// ROUTING</span>
+                  </summary>
+                  <div class="relative">
+                    <div class="bg-white rounded-md mt-2 shadow-md overflow-hidden">
+                      <div class="bg-slate-100 py-2 px-4 text-xs text-slate-500 border-b border-slate-200">app.routes.ts</div>
+                      <div class="p-1 text-black">
+                        <markdown [data]="appRoutesCode" class="markdown-code"></markdown>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </li>
+
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <footer class="mt-12 text-center text-xs text-slate-500">
+    <p>Tip: Los colores ayudan a distinguir responsabilidades:
+      <span class="text-purple-600">Páginas/Vistas</span>,
+      <span class="text-green-600">Servicios</span>,
+      <span class="text-amber-600">Stores Akita</span>,
+      <span class="text-rose-600">Config App</span>,
+      <span class="text-lime-600">Routing</span>.
+    </p>
+    <p class="mt-2">Usa <kbd>►</kbd> / <kbd>▼</kbd> para expandir o colapsar el contenido de los archivos.</p>
+  </footer>
+</div>
+

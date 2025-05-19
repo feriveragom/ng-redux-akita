@@ -5,6 +5,8 @@
 https://tailwindcss.com/docs/installation/framework-guides/angular
 
 ```bash
+cd <<console reference>>
+
 ng new <<my-project>> --style css
 
 cd <<my-project>>
@@ -37,70 +39,87 @@ app.component.html
 </h1>
 ```
 
-## Posible estructura de directorio para un proyecto angular 19
+## https://opensource.salesforce.com/akita/docs/installation
 
-/public/assets
-/src
-    /app
-        <</requirement-name>>
-            /components
-                /shared
-                /feature
-            /services
-            /interfaces
-            /pipes
-            /directives
-            /mappers
-            /pages        
-        /store
-            <</requirement-name>>
-                /actions
-                /reducers
-                /selectors
-                /effects
-        app.component.html
-        app.component.ts
-        app.config.ts
-        app.routes.ts
-    /environments
-    /i18n 
-    index.html
-    main.ts
-    styles.css
+### Actualizar tslib a la versión que @datorama/akita requiere
+```bash
+npm install tslib@2.4.1
+```
 
-### Descripción de Directorios
+### Instalar Akita
+```bash
+npm install @datorama/akita
+```
 
-- **/public/assets**: Archivos estáticos como imágenes, fuentes e iconos. Angular 19 recomienda esta ubicación para mejor rendimiento y caching.
+### Configurar automáticamente tu proyecto Angular para usar Akita
+```bash
+ng add @datorama/akita
+```
 
-- **/src**: Directorio principal del código fuente.
-  - **/app**: Contiene todos los componentes y lógica de la aplicación.
-    - **/<</requirement-name>>**: Agrupa por funcionalidad/módulo, permitiendo una organización más escalable.
-      - **/components**: Componentes específicos de esta funcionalidad.
-        - **/shared**: Componentes reutilizables dentro de esta funcionalidad.
-        - **/feature**: Componentes específicos que implementan features concretas.
-      - **/services**: Servicios que manejan la lógica de negocio y comunicación con APIs para esta funcionalidad.
-      - **/interfaces**: Tipos e interfaces TypeScript específicos para esta funcionalidad.
-      - **/pipes**: Pipes personalizados para transformaciones de datos en plantillas.
-      - **/directives**: Directivas que extienden el comportamiento de elementos HTML.
-      - **/mappers**: Funciones para transformar datos entre diferentes formatos o estructuras.
-      - **/pages**: Componentes de página que representan vistas completas.
-    - **/store**: Gestión centralizada del estado de la aplicación.
-      - **/<</requirement-name>>**: Separación del estado por funcionalidad.
-        - **/actions**: Acciones que describen eventos en la aplicación.
-        - **/reducers**: Funciones puras que procesan las acciones y actualizan el estado.
-        - **/selectors**: Funciones para obtener datos específicos del estado.
-        - **/effects**: Manejo de efectos secundarios como llamadas a APIs.
-    - **app.component.html**: Plantilla del componente raíz.
-    - **app.component.ts**: Componente raíz de la aplicación.
-    - **app.config.ts**: Configuración de la aplicación (proveedores, configuración global).
-    - **app.routes.ts**: Definición de rutas para la navegación.
-  - **/environments**: Configuraciones específicas para diferentes entornos (desarrollo, producción).
-  - **/i18n**: Archivos para internacionalización y traducción.
-  - **index.html**: Página HTML principal que carga la aplicación.
-  - **main.ts**: Punto de entrada de la aplicación donde se inicializa.
-  - **styles.css**: Estilos globales, incluyendo la importación de Tailwind CSS.
+### Formas del estado con AKITA
 
-Esta estructura sigue las mejores prácticas de Angular 19, organizando el código por funcionalidad y separando claramente las responsabilidades. La organización por características facilita el mantenimiento y la escalabilidad del proyecto.
+1. **Store**:
+   - **Uso**: Se utiliza para gestionar el estado de una única entidad o un conjunto de datos que no se organiza en forma de colección.
+   - **Importación**: `import { Store, StoreConfig } from '@datorama/akita';`
+   - **Ejemplo**: Ideal para estados simples, como la configuración de la aplicación o la sesión de usuario.
+   - **Ventajas**: Simplicidad y facilidad de uso para estados no complejos.
+
+2. **EntityStore**:
+   - **Uso**: Diseñado para gestionar colecciones de entidades, similar a una tabla en una base de datos.
+   - **Importación**: `import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';`
+   - **Ejemplo**: Ideal para manejar listas de elementos, como usuarios o productos.
+   - **Ventajas**: Proporciona funcionalidades adicionales para gestionar múltiples elementos, como agregar, actualizar, o eliminar entidades.
+
+Estas dos formas permiten gestionar el estado de manera eficiente según las necesidades específicas de tu aplicación. `Store` es adecuado para estados simples, mientras que `EntityStore` es ideal para colecciones de datos más complejas.
+
+### Propuesta de Estructura de Directorio deun Proyecto Angular + AKITA
+
+```tree
+/
+├── public/
+│   └── assets/
+├── src/
+│   ├── app/
+│   │   ├── interfaces/
+│   │   ├── pipes/
+│   │   ├── directives/
+│   │   ├── mappers/
+│   │   ├── components/
+│   │   │   ├── shared/
+│   │   │   │   └── header/
+│   │   │   │       ├── header.component.html
+│   │   │   │       └── header.component.ts
+│   │   │   └── feature/
+│   │   ├── pages/
+│   │   │   ├── home/
+│   │   │   |   ├── home.component.html
+│   │   │   |   └── home.component.ts
+|   |   |   ├── user/
+|   |   |   |   ├── user.component.html
+│   │   │   |   └── user.component.ts //-> AKITA USE
+│   │   ├── <<requirement-name>>/    //---> opcional
+│   │   │   ├── pages/
+│   │   │   ├── components/
+│   │   │   │   ├── shared/
+│   │   │   │   └── feature/
+│   │   │   ├── interfaces/
+│   │   │   ├── pipes/
+│   │   │   ├── directives/
+│   │   │   └── mappers/
+│   │   ├── store/            //----> AKITA CONFIG
+│   │   │   └── <<requirement-name>>/
+│   │   │       ├── <<requirement-name>>.query.ts
+│   │   │       ├── <<requirement-name>>.state.ts
+│   │   │       ├── <<requirement-name>>.service.ts
+│   │   │       └── <<requirement-name>>.store.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.ts
+│   │   ├── app.config.ts  //----> AKITA PROVIDERS
+│   │   └── app.routes.ts
+│   ├── environments/
+│   └── styles.css
+└── .postcssrc.json
+```
 
 ## Tips
 
@@ -190,116 +209,23 @@ ng g c app/pages/<<page-name>> -s --skip-tests
 ng g s app/services/<<service-name>> -s --skip-tests
 ng g environments
 
+### - Rutas con HashLocationStrategy
+El HashLocationStrategy es una estrategia de navegación que añade un símbolo hash (#) a las URLs de tu aplicación Angular. Por ejemplo, en lugar de tener rutas como https://miapp.com/usuarios, tendrías https://miapp.com/#/usuarios.
+
+```ts
+import { HashLocationStrategy, LocationStrategy } from '@angular/common'
+  // HashStrategy
+  {
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }
+```
+
+## Markdown
+```bash
+npm install ngx-markdown marked prismjs
+```
+
 ## .
 
 
-# --------------------REVISAR DESDE AQUI
-# Conceptos Clave de Angular 19
-
-## Componentes y Plantillas
-- Standalone Components (recomendado, reemplaza a NgModules, por defecto en Angular 19)
-- Directivas de control modernas (@if, @for, @switch, @empty)
-- Componentes clásicos con módulos (legacy)
-- Property Binding, Event Binding, Two-way Binding
-- input / output para comunicación entre componentes (en minúsculas desde Angular 14+)
-- Proyección de contenido (ng-content)
-- ViewChild / ContentChild
-- HostListener / HostBinding
-- Pipes (async, date, etc.)
-
-## Estado y Reactividad
-- Signals (nuevo sistema reactivo recomendado)
-- computed() para derivar estados
-- effect() para efectos secundarios
-- toSignal() / toObservable() para interoperar con RxJS
-- RxJS (Observables, Subjects)
-- Change Detection (Default y OnPush)
-- Zoneless Applications (activado por defecto en Angular 19, mejor rendimiento)
-
-## Routing y Navegación
-- Rutas con loadComponent (para Standalone)
-- Lazy Loading de componentes
-- Guards funcionales (reemplaza a CanActivate)
-- Resolvers funcionales
-- Parámetros de ruta y queryParams
-- Router Events
-
-## Servicios y DI
-- Inyección de dependencias
-- Servicios Singleton (@Injectable)
-- Inyección con inject() function (alternativa moderna a constructor)
-- Tokens de inyección (InjectionToken)
-- Providers y ámbitos de inyección
-- Multi-providers
-
-## HTTP y Comunicación
-- HttpClient
-- Interceptores HTTP
-- Comunicación con API REST
-- Manejo de errores HTTP
-- HttpContext
-
-## Forms
-- Reactive Forms (recomendado)
-- FormControl, FormGroup, FormArray
-- FormBuilder
-- Validación de formularios
-- Template-driven Forms (legacy)
-
-## Estilos y CSS
-- Component Styles
-- Shadow DOM y ViewEncapsulation
-- ::ng-deep (para sobrescribir estilos)
-- Host Context
-- Tailwind CSS (integración)
-
-## Optimización
-- Signal-based Change Detection
-- Pure Pipes
-- trackBy para listas (@for ... track item.id)
-- Lazy Loading
-- OnPush Change Detection
-
-## Testing
-- TestBed
-- Component Testing
-- Service Testing
-- Mocks y Spies
-- Harness para Testing
-
-## Funcionalidades Avanzadas
-- Directivas personalizadas
-- Content Projection
-- Dynamic Components
-- Animaciones
-- Internacionalización (i18n)
-
-## Server-Side Rendering
-- Angular Universal
-- Hydration
-- Meta tags para SEO
-
-## Herramientas y Ecosistema
-- Angular CLI
-- ESLint
-- Angular DevTools
-- Tooling para VSCode
-- Angular Compiler (AOT)
-
-## Bibliotecas Comunes
-- Angular Material (componentes UI)
-- NgRx (alternativa a Signals para gestión de estado compleja)
-- Akita (alternativa más ligera para gestión de estado)
-- RxAngular (rendimiento avanzado)
-- TanStack Query (gestión de datos del servidor)
-
-## Novedades en Angular 17-19
-- Nuevas directivas de control (@if, @for, @switch)
-- Signals como sistema de reactividad de primera clase
-- Aplicaciones sin Zone.js (zoneless)
-- @angular/ssr para Server-Side Rendering mejorado
-- Deferrable Views (@defer)
-- Mejoras en Developer Experience (DX)
-- Nueva documentación en angular.dev
-- Soporte para Server Actions
-- Signals para Forms (SignalForm)

@@ -17,8 +17,15 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@datorama/akita": "^8.0.1",
+    "@tailwindcss/postcss": "^4.1.7",
+    "marked": "^15.0.11",
+    "ngx-markdown": "^19.1.1",
+    "postcss": "^8.5.3",
+    "prismjs": "^1.30.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
+    "tailwindcss": "^4.1.7",
+    "tslib": "^2.4.1",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
