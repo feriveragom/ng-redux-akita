@@ -1,2 +1,317 @@
 <app-header></app-header>
-<p>home works!</p>
+
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
+  <!-- Título principal -->
+  <div class="text-center mb-12">
+    <h1 class="text-5xl font-bold text-white mb-4">
+      🔮 Akita State Management
+    </h1>
+    <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+      Diagrama visual del flujo de datos reactivo en Akita - Basado en la documentación oficial
+    </p>
+    <!-- Enlace al diagrama original -->
+    <div class="mt-6">
+      <a href="https://opensource.salesforce.com/akita/" target="_blank" 
+         class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+        </svg>
+        Ver diagrama original en la documentación oficial de Akita
+      </a>
+    </div>
+  </div>
+
+  <!-- Diagrama oficial de Akita -->
+  <div class="max-w-6xl mx-auto mb-16">
+    <div class="bg-white rounded-3xl p-8 shadow-2xl border-2 border-gray-200">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Diagrama Oficial de Akita</h2>
+      <div class="flex justify-center">
+        <img src="/assets/akita-flow.jpg" alt="Diagrama de flujo oficial de Akita" 
+             class="max-w-full h-auto rounded-xl shadow-lg border border-gray-300">
+      </div>
+      <p class="text-gray-600 text-center mt-6 italic">
+        Diagrama original de la documentación oficial de Akita mostrando el flujo de datos reactivo
+      </p>
+    </div>
+  </div>
+
+  <!-- Explicación detallada del flujo de datos -->
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white/95 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-gray-300">
+      <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Flujo de Datos en Akita: Explicación Detallada</h2>
+      
+      <!-- Tarjetas explicativas del flujo -->
+      <div class="space-y-8">
+        
+        <!-- 1. Inicio del Flujo: Component -->
+        <div class="bg-red-50 border-l-8 border-red-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-red-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-red-700 mb-4">🚀 Inicio del Flujo: Component</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                <strong>Todo comienza en el componente.</strong> Aquí es donde el usuario interactúa con la aplicación 
+                a través de eventos como clicks, inputs, formularios, etc.
+              </p>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-red-300">
+                <p class="text-gray-600"><strong>Ejemplo:</strong> Un usuario hace click en "Obtener Datos del Usuario" 
+                → El componente llama a <code class="bg-gray-100 px-2 py-1 rounded">userService.fetchUserData(userId)</code></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Component → Service -->
+        <div class="bg-orange-50 border-l-8 border-orange-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-orange-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-orange-700 mb-4">⚙️ Component → Service: Acciones y Lógica</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                El <strong>Service contiene toda la lógica de negocio</strong>. Es el intermediario que:
+              </p>
+              <ul class="text-gray-700 space-y-2 mb-4">
+                <li class="flex items-start">
+                  <span class="text-orange-500 mr-2">•</span>
+                  <span>Recibe las acciones del componente</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-500 mr-2">•</span>
+                  <span>Procesa la lógica de negocio necesaria</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-500 mr-2">•</span>
+                  <span>Decide si necesita datos externos (API calls)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-500 mr-2">•</span>
+                  <span>Actualiza el estado en el Store</span>
+                </li>
+              </ul>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-orange-300">
+                <p class="text-gray-600"><strong>Responsabilidad clave:</strong> El Service es quien toma las decisiones 
+                sobre cuándo y cómo actualizar el estado global.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Service ↔ Backend API -->
+        <div class="bg-blue-50 border-l-8 border-blue-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-blue-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-blue-700 mb-4">🔄 Service ↔ Backend API: Comunicación Externa</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Cuando el Service necesita datos externos, <strong>es quien maneja toda la comunicación HTTP</strong>:
+              </p>
+              <div class="grid md:grid-cols-2 gap-6 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-blue-200">
+                  <h4 class="font-bold text-blue-600 mb-2">📤 Service → API</h4>
+                  <p class="text-gray-600 text-sm">Envía requests HTTP (GET, POST, PUT, DELETE) según la lógica de negocio.</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-blue-200">
+                  <h4 class="font-bold text-blue-600 mb-2">📥 API → Service</h4>
+                  <p class="text-gray-600 text-sm">Recibe responses y decide cómo procesar los datos antes de actualizar el Store.</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-blue-300">
+                <p class="text-gray-600"><strong>Punto clave:</strong> El Service maneja loading states, errores, 
+                y transformaciones de datos antes de pasarlos al Store.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Service → Store -->
+        <div class="bg-green-50 border-l-8 border-green-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-green-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-green-700 mb-4">💾 Service → Store: Actualizaciones de Estado</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                El <strong>Store es el único lugar donde se almacena el estado</strong>. El Service lo actualiza usando:
+              </p>
+              <div class="grid md:grid-cols-3 gap-4 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-green-200 text-center">
+                  <code class="bg-green-100 px-3 py-1 rounded font-bold text-green-700">update()</code>
+                  <p class="text-gray-600 text-sm mt-2">Actualiza propiedades del estado</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-green-200 text-center">
+                  <code class="bg-green-100 px-3 py-1 rounded font-bold text-green-700">setLoading()</code>
+                  <p class="text-gray-600 text-sm mt-2">Controla estados de carga</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-green-200 text-center">
+                  <code class="bg-green-100 px-3 py-1 rounded font-bold text-green-700">setError()</code>
+                  <p class="text-gray-600 text-sm mt-2">Maneja errores</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-green-300">
+                <p class="text-gray-600"><strong>Inmutabilidad:</strong> Cada actualización crea un nuevo estado 
+                inmutable, garantizando la predictibilidad.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Store → Query -->
+        <div class="bg-purple-50 border-l-8 border-purple-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-purple-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-purple-700 mb-4">📡 Store → Query: Streaming Data Reactivo</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Las <strong>Queries son los "escuchadores" del Store</strong>. Automáticamente emiten nuevos datos cuando el estado cambia:
+              </p>
+              <div class="grid md:grid-cols-2 gap-6 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 class="font-bold text-purple-600 mb-2">🔍 Selectores Reactivos</h4>
+                  <ul class="text-gray-600 text-sm space-y-1">
+                    <li>• <code>select()</code> - Todo el estado</li>
+                    <li>• <code>select('property')</code> - Una propiedad</li>
+                    <li>• <code>select(['a', 'b'])</code> - Múltiples propiedades</li>
+                  </ul>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-purple-200">
+                  <h4 class="font-bold text-purple-600 mb-2">⚡ Optimización Automática</h4>
+                  <ul class="text-gray-600 text-sm space-y-1">
+                    <li>• <code>distinctUntilChanged()</code></li>
+                    <li>• Solo emite cuando cambia el valor</li>
+                    <li>• Previene renders innecesarios</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-purple-300">
+                <p class="text-gray-600"><strong>Reactividad:</strong> Los componentes se suscriben a Queries y 
+                se actualizan automáticamente cuando cambia el estado.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Query ↔ Other Queries -->
+        <div class="bg-indigo-50 border-l-8 border-indigo-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-indigo-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-indigo-700 mb-4">🔗 Queries Interconectadas: Composición de Datos</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Las <strong>Queries pueden combinarse entre sí</strong> para crear streams de datos más complejos:
+              </p>
+              <div class="space-y-4 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-indigo-200">
+                  <h4 class="font-bold text-indigo-600 mb-2">🧩 Composición de Stores</h4>
+                  <p class="text-gray-600 text-sm">Combinar datos de múltiples stores (users + posts + comments)</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-indigo-200">
+                  <h4 class="font-bold text-indigo-600 mb-2">🔄 Operadores RxJS</h4>
+                  <p class="text-gray-600 text-sm">Usar combineLatest, switchMap, mergeMap para lógica compleja</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-indigo-200">
+                  <h4 class="font-bold text-indigo-600 mb-2">🎯 Filtrado y Transformación</h4>
+                  <p class="text-gray-600 text-sm">Aplicar filtros, ordenamientos y transformaciones de datos</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-indigo-300">
+                <p class="text-gray-600"><strong>Poder de RxJS:</strong> Las Queries aprovechan todo el ecosistema 
+                RxJS para crear flujos de datos reactivos sofisticados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Query → Component -->
+        <div class="bg-rose-50 border-l-8 border-rose-500 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex items-start">
+            <div class="bg-rose-500 text-white p-4 rounded-full mr-6 flex-shrink-0">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-2xl font-bold text-rose-700 mb-4">🎨 Query → Component: Renderizado Final</h3>
+              <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                <strong>El ciclo se completa</strong> cuando los componentes reciben los datos actualizados y se re-renderizan:
+              </p>
+              <div class="grid md:grid-cols-2 gap-6 mb-4">
+                <div class="bg-white rounded-lg p-4 border border-rose-200">
+                  <h4 class="font-bold text-rose-600 mb-2">📊 Suscripciones Reactivas</h4>
+                  <p class="text-gray-600 text-sm">Los componentes se suscriben a Queries usando observables o signals</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-rose-200">
+                  <h4 class="font-bold text-rose-600 mb-2">🔄 Re-render Automático</h4>
+                  <p class="text-gray-600 text-sm">Angular detecta cambios automáticamente y actualiza la UI</p>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-4 border-l-4 border-rose-300">
+                <p class="text-gray-600"><strong>Resultado final:</strong> Una UI siempre sincronizada con el estado 
+                global, sin necesidad de gestión manual de actualizaciones.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Resumen del ciclo completo -->
+      <div class="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 border-2 border-blue-200">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">🔄 Resumen del Ciclo Completo</h3>
+        <div class="flex flex-wrap justify-center items-center gap-4 text-sm font-semibold">
+          <span class="bg-red-500 text-white px-4 py-2 rounded-full">Component</span>
+          <span class="text-gray-500">→</span>
+          <span class="bg-orange-500 text-white px-4 py-2 rounded-full">Service</span>
+          <span class="text-gray-500">↔</span>
+          <span class="bg-blue-500 text-white px-4 py-2 rounded-full">API</span>
+          <span class="text-gray-500">→</span>
+          <span class="bg-green-500 text-white px-4 py-2 rounded-full">Store</span>
+          <span class="text-gray-500">→</span>
+          <span class="bg-purple-500 text-white px-4 py-2 rounded-full">Query</span>
+          <span class="text-gray-500">↔</span>
+          <span class="bg-indigo-500 text-white px-4 py-2 rounded-full">Other Queries</span>
+          <span class="text-gray-500">→</span>
+          <span class="bg-rose-500 text-white px-4 py-2 rounded-full">Component</span>
+        </div>
+        <p class="text-gray-600 text-center mt-6 italic">
+          Un flujo unidireccional y reactivo que garantiza la consistencia del estado en toda la aplicación
+        </p>
+      </div>
+    </div>
+
+    <!-- Llamada a la acción -->
+    <div class="mt-16 text-center">
+      <h2 class="text-3xl font-bold text-white mb-8">¿Listo para explorar Akita en acción?</h2>
+      <div class="flex justify-center gap-8">
+        <a routerLink="/akita-store" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-xl text-lg">
+          Ver Conceptos de Store
+        </a>
+        <a routerLink="/user_by_id" class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-xl text-lg">
+          Ver Implementación Práctica
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

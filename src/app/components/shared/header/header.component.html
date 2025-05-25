@@ -1,13 +1,22 @@
 <nav class="navbar flex justify-between items-center p-4 bg-gray-800 text-white">
     <ul class="flex items-center gap-4">
         <li class="text-lg font-medium cursor-pointer">
-            <a routerLink="/home" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            <a routerLink="/home" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg" [routerLinkActiveOptions]="{exact: true}" class="flex items-center gap-2">
+                <img src="/assets/akita-icon.svg" alt="Akita" class="w-6 h-6">
+                Dashboard
+            </a>
         </li>
         <li class="text-lg font-medium cursor-pointer">
-            <a routerLink="/akita-store" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg" [routerLinkActiveOptions]="{exact: true}">Akita Store</a>
+            <a routerLink="/akita-store" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg" [routerLinkActiveOptions]="{exact: true}">Akita Store: Árbol</a>
         </li>
         <li class="text-lg font-medium cursor-pointer">
-            <a routerLink="/user_by_id" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg">User by ID</a>
+            <a routerLink="/user_by_id" routerLinkActive="text-white bg-blue-500 px-5 py-2 rounded-lg">Akita Store: Demo</a>
+        </li>
+        <li class="text-lg font-medium cursor-pointer">
+            Akita EntityStore: Conceptos
+        </li>
+        <li class="text-lg font-medium cursor-pointer">
+            Akita EntityStore: Implementación
         </li>
     </ul>
     @if (userName()) {

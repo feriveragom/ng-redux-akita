@@ -72,7 +72,7 @@ ng add @datorama/akita
 
 Estas dos formas permiten gestionar el estado de manera eficiente según las necesidades específicas de tu aplicación. `Store` es adecuado para estados simples, mientras que `EntityStore` es ideal para colecciones de datos más complejas.
 
-### Propuesta de Estructura de Directorio deun Proyecto Angular + AKITA
+### Propuesta de Estructura de Directorio de un Proyecto Angular + AKITA
 
 ```tree
 /
