@@ -80,10 +80,6 @@ Estas dos formas permiten gestionar el estado de manera eficiente según las nec
 │   └── assets/
 ├── src/
 │   ├── app/
-│   │   ├── interfaces/
-│   │   ├── pipes/
-│   │   ├── directives/
-│   │   ├── mappers/
 │   │   ├── components/
 │   │   │   ├── shared/
 │   │   │   │   └── header/
@@ -97,21 +93,16 @@ Estas dos formas permiten gestionar el estado de manera eficiente según las nec
 |   |   |   ├── user/
 |   |   |   |   ├── user.component.html
 │   │   │   |   └── user.component.ts //-> AKITA USE
-│   │   ├── <<requirement-name>>/    //---> opcional
-│   │   │   ├── pages/
-│   │   │   ├── components/
-│   │   │   │   ├── shared/
-│   │   │   │   └── feature/
-│   │   │   ├── interfaces/
-│   │   │   ├── pipes/
-│   │   │   ├── directives/
-│   │   │   └── mappers/
 │   │   ├── store/            //----> AKITA CONFIG
-│   │   │   └── <<requirement-name>>/
-│   │   │       ├── <<requirement-name>>.query.ts
-│   │   │       ├── <<requirement-name>>.state.ts
-│   │   │       ├── <<requirement-name>>.service.ts
-│   │   │       └── <<requirement-name>>.store.ts
+│   │   │   └── user/         // <<requirement-name>>/
+│   │   │       ├── user.query.ts
+│   │   │       ├── user.state.ts
+│   │   │       ├── user.service.ts
+│   │   │       └── user.store.ts
+│   │   ├── interfaces/
+│   │   ├── pipes/
+│   │   ├── directives/
+│   │   ├── mappers/
 │   │   ├── app.component.html
 │   │   ├── app.component.ts
 │   │   ├── app.config.ts  //----> AKITA PROVIDERS

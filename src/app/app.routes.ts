@@ -6,6 +6,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/user/user.component')
     },
     {
+        path: 'akita-store',
+        loadComponent: () => import('./pages/akita-store/akita-store.component')
+    },
+    {
         path: 'home',
         loadComponent: () => import('./pages/home/home.component')
     },
