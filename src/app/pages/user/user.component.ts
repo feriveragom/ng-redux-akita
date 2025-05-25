@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { SessionQuery } from '../../store/session/session.query';
-import { SessionService } from '../../store/session/session.service';
+import { UserQuery } from '../../store/user/user.query';
+import { UserService } from '../../store/user/user.service';
 import { HeaderComponent } from '../../components/shared/header/header.component'
 
 @Component({
@@ -12,22 +12,22 @@ import { HeaderComponent } from '../../components/shared/header/header.component
 export default class UserComponent implements OnInit {
   userName = signal<string>('');
 
-  constructor(private sessionQuery: SessionQuery, private sessionService: SessionService) {}
+  constructor(private userQuery: UserQuery, private userService: UserService) {}
 
   ngOnInit(): void {
     // Usamos directamente el método del query
-    this.sessionQuery.select(['name']).subscribe((state: any) => {
+    this.userQuery.select(['name']).subscribe((state: any) => {
       this.userName.set(state.name);
     });
   }
 
   // Método para simular la obtención de datos de usuario
   fetchUserData(userId: number): void {
-    this.sessionService.fetchUserData(userId);
+    this.userService.fetchUserData(userId);
   }
 
   // Método para actualizar el nombre de usuario
   updateUserName(newName: string): void {
-    this.sessionService.updateUserName(newName);
+    this.userService.updateUserName(newName);
   }
 }

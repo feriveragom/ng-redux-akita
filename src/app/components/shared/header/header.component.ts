@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SessionQuery } from '../../../store/session/session.query';
-import { SessionService } from '../../../store/session/session.service';
+import { UserQuery } from '../../../store/user/user.query';
+import { UserService } from '../../../store/user/user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +14,17 @@ export class HeaderComponent implements OnInit {
   userName = signal<string>('');
 
   constructor(
-    private sessionQuery: SessionQuery, 
-    private sessionService: SessionService,
+    private userQuery: UserQuery, 
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
-    this.sessionQuery.select('name').subscribe((name: string) => {
+    this.userQuery.select('name').subscribe((name: string) => {
       this.userName.set(name);
     });
   }
 
   reset(): void {
-    this.sessionService.reset();
+    this.userService.reset();
   }
 }
